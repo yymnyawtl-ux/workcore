@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://workcore-hr.peachy-sugar-3131.chatgpt.site/sitemap.xml
+Sitemap: https://yymnyawtl-ux.github.io/workcore/sitemap.xml

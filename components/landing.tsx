@@ -36,6 +36,8 @@ import {
   solutions,
 } from '@/app/data';
 
+const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+
 const nav = [
   ['Решения', '#solutions'],
   ['Процесс', '#pipeline'],
@@ -155,7 +157,7 @@ export function Hero() {
           </div>
           <div className="system-image">
             <Image
-              src="/workcore-hero.png"
+              src={`${assetBase}/workcore-hero.png`}
               alt="Визуализация цифрового процесса подбора"
               fill
               priority
@@ -374,8 +376,8 @@ function Consent() {
     <label className="core-consent">
       <input type="checkbox" required />
       <span>
-        Согласен с <a href="/consent">условиями обработки данных</a> и
-        ознакомлен с <a href="/privacy">политикой конфиденциальности</a>.
+        Согласен с <a href={`${assetBase}/consent.html`}>условиями обработки данных</a> и
+        ознакомлен с <a href={`${assetBase}/privacy.html`}>политикой конфиденциальности</a>.
       </span>
     </label>
   );
@@ -506,8 +508,8 @@ export function Footer() {
       <div className="footer-meta">
         <span>ОКВЭД 78.1 — деятельность агентств по подбору персонала</span>
         <div>
-          <a href="/privacy">Политика конфиденциальности</a>
-          <a href="/consent">Обработка персональных данных</a>
+          <a href={`${assetBase}/privacy.html`}>Политика конфиденциальности</a>
+          <a href={`${assetBase}/consent.html`}>Обработка персональных данных</a>
         </div>
         <span>© {new Date().getFullYear()} WorkCore</span>
       </div>
