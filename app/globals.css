@@ -116,3 +116,13 @@ footer{padding:70px clamp(22px,4vw,68px) 28px;background:#050815;border-top:1px 
 @media(max-width:680px){.core-hero{grid-template-columns:minmax(0,1fr)}.core-copy h1{font-size:clamp(48px,13vw,58px);line-height:.88;overflow-wrap:anywhere}.core-copy h1 i,.core-copy h1 span{display:block;transform:none;margin:.08em 0}.core-copy h1 span{font-size:.72em}.core-lead{max-width:100%;overflow-wrap:anywhere;padding-right:8px}}
 .core-mobile-nav .core-button{justify-content:center}
 .hash-anchor{position:relative;top:-90px;display:block;height:0;visibility:hidden}
+
+
+/* Company contact block */
+.footer-company{display:grid;grid-template-columns:1.35fr .75fr 1.35fr .9fr;border-top:1px solid #26324d;border-left:1px solid #26324d;margin-top:30px}
+.footer-company>div{min-width:0;padding:28px 24px;border-right:1px solid #26324d;border-bottom:1px solid #26324d;display:flex;flex-direction:column;gap:12px;background:#080d1b}
+.footer-company span{font:11px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.14em;text-transform:uppercase;color:#6f7d96}
+.footer-company strong,.footer-company p,.footer-company address,.footer-company a{font-size:16px;line-height:1.55;margin:0;color:#d7deec;font-style:normal;overflow-wrap:anywhere}
+.footer-company strong{font-weight:650;color:#f5f7ff}.footer-company a:hover{color:var(--primary)}
+@media(max-width:1100px){.footer-company{grid-template-columns:1fr 1fr}}
+@media(max-width:680px){.footer-company{grid-template-columns:1fr}.footer-company>div{padding:22px 18px}}
