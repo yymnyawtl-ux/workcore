@@ -1,12 +1,12 @@
 export const company = {
   brandName: 'WorkCore',
-  legalName: '',
-  inn: '',
+  legalName: 'Индивидуальный предприниматель Ин Максим Дмитриевич',
+  inn: '251134460136',
   ogrn: '',
-  ogrnip: '',
-  legalAddress: '',
-  phone: '',
-  email: '',
+  ogrnip: '326237500134880',
+  legalAddress: '350004, Россия, Краснодарский край, г. Краснодар, ул. Минская, д. 122/5, кв. 19',
+  phone: '+7 967 677-40-11',
+  email: 'workcore67@gmail.com',
 };
 
 export const solutions = [
