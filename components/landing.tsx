@@ -505,7 +505,26 @@ export function Footer() {
         ))}
         <a href="#request">Оставить заявку</a>
       </div>
-      <div className="footer-meta">
+            <div className="footer-company" aria-label="Реквизиты и контакты WorkCore">
+        <div>
+          <span>Организация</span>
+          <strong>ИП Ин Максим Дмитриевич</strong>
+        </div>
+        <div>
+          <span>Реквизиты</span>
+          <p>ИНН 251134460136<br />ОГРНИП 326237500134880</p>
+        </div>
+        <div>
+          <span>Адрес</span>
+          <address>350004, Россия, Краснодарский край, г. Краснодар, ул. Минская, д. 122/5, кв. 19</address>
+        </div>
+        <div>
+          <span>Связаться</span>
+          <a href="mailto:workcore67@gmail.com">workcore67@gmail.com</a>
+          <a href="tel:+79676774011">+7 967 677-40-11</a>
+        </div>
+      </div>
+<div className="footer-meta">
         <span>ОКВЭД 78.1 — деятельность агентств по подбору персонала</span>
         <div>
           <a href={`${assetBase}/privacy.html`}>Политика конфиденциальности</a>
