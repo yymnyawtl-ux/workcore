@@ -210,7 +210,7 @@ export function Solutions() {
         {solutions.map(([title, text], i) => {
           const Icon = icons[i];
           return (
-            <article key={title} className={i === 0 ? 'wide' : ''}>
+            <article key={title}>
               <span>0{i + 1}</span>
               <Icon />
               <h3>{title}</h3>
