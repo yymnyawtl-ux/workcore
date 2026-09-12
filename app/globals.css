@@ -126,3 +126,13 @@ footer{padding:70px clamp(22px,4vw,68px) 28px;background:#050815;border-top:1px 
 .footer-company strong{font-weight:650;color:#f5f7ff}.footer-company a:hover{color:var(--primary)}
 @media(max-width:1100px){.footer-company{grid-template-columns:1fr 1fr}}
 @media(max-width:680px){.footer-company{grid-template-columns:1fr}.footer-company>div{padding:22px 18px}}
+
+
+.footer-requisites{max-width:920px;padding:70px 0 62px}
+.footer-requisites-label{margin:0 0 42px;font:11px ui-monospace,monospace;letter-spacing:.26em;text-transform:uppercase;color:#75829a}
+.footer-requisites-phone{display:block;width:max-content;max-width:100%;font-size:clamp(38px,5.2vw,72px);font-weight:720;line-height:.95;letter-spacing:-.055em;color:#f3f6ff}
+.footer-requisites-email{display:block;width:max-content;max-width:100%;margin-top:16px;font-size:clamp(22px,2.6vw,37px);line-height:1.15;color:#98a5bb;overflow-wrap:anywhere}
+.footer-requisites-phone:hover,.footer-requisites-email:hover{color:var(--primary)}
+.footer-requisites-details{display:grid;gap:14px;max-width:850px;margin-top:48px;padding-top:32px;border-top:1px solid #26324d}
+.footer-requisites-details p,.footer-requisites-details address{margin:0;font-size:clamp(16px,1.55vw,22px);line-height:1.5;color:#909db4;font-style:normal;overflow-wrap:anywhere}
+@media(max-width:680px){.footer-requisites{padding:56px 0 48px}.footer-requisites-label{margin-bottom:30px}.footer-requisites-details{margin-top:36px}}
