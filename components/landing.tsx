@@ -42,8 +42,8 @@ const nav = [
   ['Решения', '#solutions'],
   ['Процесс', '#pipeline'],
   ['Направления', '#directions'],
-  ['Кандидатам', '#candidates'],
   ['Принципы', '#principles'],
+  ['Обсудить задачу', '#request'],
 ];
 
 function Logo() {
@@ -283,45 +283,11 @@ export function Directions() {
   );
 }
 
-export function Candidates() {
-  const steps = [
-    'Отклик',
-    'Знакомство',
-    'Интервью',
-    'Подходящая вакансия',
-    'Следующий этап',
-  ];
-  return (
-    <section className="candidate-zone reveal" id="candidates">
-      <div className="candidate-copy">
-        <p className="sys-label">04 / КАНДИДАТАМ</p>
-        <h2>Ищете работу?</h2>
-        <p>
-          Расскажите о направлении, которое рассматриваете. Если увидим
-          релевантную задачу, познакомимся и обсудим возможный следующий шаг.
-        </p>
-        <a className="core-button" href="#candidate-form">
-          Оставить информацию <ArrowRight />
-        </a>
-      </div>
-      <div className="candidate-flow">
-        {steps.map((step, i) => (
-          <div key={step}>
-            <span>{String(i + 1).padStart(2, '0')}</span>
-            <b>{step}</b>
-            {i < steps.length - 1 && <ArrowRight />}
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 export function Principles() {
   return (
     <section className="principles reveal" id="principles">
       <div>
-        <p className="sys-label">05 / ПРИНЦИПЫ</p>
+        <p className="sys-label">04 / ПРИНЦИПЫ</p>
         <h2>
           Без общих слов.
           <br />
@@ -346,7 +312,7 @@ export function FAQ() {
   return (
     <section className="core-faq reveal">
       <aside>
-        <p className="sys-label">06 / FAQ</p>
+        <p className="sys-label">05 / FAQ</p>
         <h2>
           Вопросы
           <br />о работе
@@ -383,29 +349,15 @@ function Consent() {
   );
 }
 export function Request() {
-  const [mode, setMode] = useState<'employer' | 'candidate'>('employer');
   const [sent, setSent] = useState(false);
-  useEffect(() => {
-    const syncMode = () => {
-      if (window.location.hash === '#candidate-form') setMode('candidate');
-    };
-    syncMode();
-    window.addEventListener('hashchange', syncMode);
-    return () => window.removeEventListener('hashchange', syncMode);
-  }, []);
-  function switchMode(next: 'employer' | 'candidate') {
-    setMode(next);
-    setSent(false);
-  }
   function submit(e: FormEvent) {
     e.preventDefault();
     setSent(true);
   }
   return (
     <section className="core-request reveal" id="request">
-      <span className="hash-anchor" id="candidate-form" aria-hidden="true" />
       <div className="request-status">
-        <p className="sys-label">07 / START</p>
+        <p className="sys-label">06 / START</p>
         <span>
           <i /> ДОСТУПНО ДЛЯ НОВОЙ ЗАДАЧИ
         </span>
@@ -417,53 +369,24 @@ export function Request() {
             <br />с вашей <i>вакансии.</i>
           </h2>
           <p>
-            Выберите сценарий и заполните короткую форму. Сейчас она работает в
+            Опишите вакансию в короткой форме. Сейчас она работает в
             демонстрационном режиме и не передаёт данные.
           </p>
         </div>
         <div className="request-console">
-          <div className="mode-switch">
-            <button
-              className={mode === 'employer' ? 'active' : ''}
-              onClick={() => switchMode('employer')}
-            >
-              Работодатель
-            </button>
-            <button
-              className={mode === 'candidate' ? 'active' : ''}
-              onClick={() => switchMode('candidate')}
-            >
-              Кандидат
-            </button>
-          </div>
           <form onSubmit={submit}>
-            {mode === 'employer' ? (
-              <>
-                <label>
-                  Имя
-                  <input name="name" required autoComplete="name" />
-                </label>
-                <label>
-                  Компания
-                  <input name="company" required />
-                </label>
-                <label>
-                  Какая вакансия нужна
-                  <input name="vacancy" required />
-                </label>
-              </>
-            ) : (
-              <>
-                <label>
-                  Имя
-                  <input name="name" required autoComplete="name" />
-                </label>
-                <label>
-                  Желаемая должность
-                  <input name="position" required />
-                </label>
-              </>
-            )}
+            <label>
+              Имя
+              <input name="name" required autoComplete="name" />
+            </label>
+            <label>
+              Компания
+              <input name="company" required />
+            </label>
+            <label>
+              Какая вакансия нужна
+              <input name="vacancy" required />
+            </label>
             <label>
               Как с вами связаться
               <input name="contact" required placeholder="Телефон или email" />
@@ -474,7 +397,7 @@ export function Request() {
             </label>
             <Consent />
             <button type="submit">
-              Отправить {mode === 'employer' ? 'заявку' : ''}
+              Отправить заявку
               <ArrowRight />
             </button>
             {sent && (
@@ -516,8 +439,7 @@ export function Footer() {
           <p>ОГРНИП: {company.ogrnip}</p>
         </div>
       </section>
-<div className="footer-meta">
-        <span>ОКВЭД 78.1 — деятельность агентств по подбору персонала</span>
+      <div className="footer-meta">
         <div>
           <a href={`${assetBase}/privacy.html`}>Политика конфиденциальности</a>
           <a href={`${assetBase}/consent.html`}>Обработка персональных данных</a>
@@ -551,7 +473,6 @@ export default function Landing() {
       <Solutions />
       <Pipeline />
       <Directions />
-      <Candidates />
       <Principles />
       <FAQ />
       <Request />
@@ -559,3 +480,4 @@ export default function Landing() {
     </main>
   );
 }
+
