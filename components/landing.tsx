@@ -1,24 +1,7 @@
 'use client';
 
-import Image from 'next/image';
-import { FormEvent, PointerEvent, useEffect, useRef, useState } from 'react';
-import {
-  ArrowRight,
-  Blocks,
-  Check,
-  CircleDot,
-  Menu,
-  ScanSearch,
-  Sparkles,
-  UserRoundSearch,
-  UsersRound,
-} from 'lucide-react';
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion';
+import { FormEvent, useState } from 'react';
+import { ArrowRight, Menu } from 'lucide-react';
 import {
   Sheet,
   SheetClose,
@@ -27,23 +10,15 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import {
-  company,
-  directions,
-  faq,
-  pipeline,
-  principles,
-  solutions,
-} from '@/app/data';
+import { company, controlPoints, formats, pipeline } from '@/app/data';
 
 const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
 
 const nav = [
-  ['Решения', '#solutions'],
-  ['Процесс', '#pipeline'],
-  ['Направления', '#directions'],
-  ['Принципы', '#principles'],
-  ['Обсудить задачу', '#request'],
+  ['Форматы', '#formats'],
+  ['Этапы работы', '#pipeline'],
+  ['Контроль', '#control'],
+  ['Контакты', '#contact'],
 ];
 
 function Logo() {
@@ -104,123 +79,83 @@ export function Header() {
 }
 
 export function Hero() {
-  const card = useRef<HTMLDivElement>(null);
-  function move(e: PointerEvent<HTMLDivElement>) {
-    const node = card.current;
-    if (!node) return;
-    const rect = node.getBoundingClientRect();
-    const rx = ((e.clientY - rect.top) / rect.height - 0.5) * -4;
-    const ry = ((e.clientX - rect.left) / rect.width - 0.5) * 6;
-    node.style.setProperty('--rx', `${rx}deg`);
-    node.style.setProperty('--ry', `${ry}deg`);
-  }
-  function reset() {
-    card.current?.style.setProperty('--rx', '0deg');
-    card.current?.style.setProperty('--ry', '0deg');
-  }
   return (
     <>
       <section className="core-hero" id="top">
         <div className="core-copy">
-          <p className="core-kicker">
-            HR / SEARCH SYSTEM <b>● ONLINE</b>
-          </p>
+          <p className="core-kicker">WORKCORE <span>/</span> ПОИСК КАК ПРОЦЕСС</p>
           <h1>
-            Люди, которые
-            <br />
-            <i>точно</i> подходят
-            <br />
-            <span>бизнесу.</span>
+            Наём под<br />
+            <span>контролем.</span>
           </h1>
           <p className="core-lead">
-            Разбираем задачу, выстраиваем поиск и проводим первичный отбор. Вы
-            подключаетесь к кандидатам, с которыми уже есть о чём говорить.
+            Выстраиваем поиск сотрудников как последовательную работу: от
+            чёткого профиля вакансии до кандидатов, готовых к вашему интервью.
           </p>
           <div className="core-actions">
             <a className="core-button" href="#request">
-              Начать с вакансии <ArrowRight />
+              Обсудить вакансии <ArrowRight size={20} />
             </a>
             <a href="#pipeline" className="text-link">
-              Посмотреть процесс ↘
+              Как устроен процесс <span>↗</span>
             </a>
           </div>
         </div>
-        <div
-          className="system-card"
-          ref={card}
-          onPointerMove={move}
-          onPointerLeave={reset}
-        >
-          <div className="system-head">
-            <span>SEARCH FLOW / ACTIVE</span>
-            <span className="signal">SIGNAL 01</span>
+        <div className="hero-board" aria-label="Схема работы WorkCore">
+          <div className="board-top">
+            <span>WORKCORE / WORKFLOW</span>
+            <span>СХЕМА РАБОТЫ</span>
           </div>
-          <div className="system-image">
-            <Image
-              src={`${assetBase}/workcore-hero.png`}
-              alt="Визуализация цифрового процесса подбора"
-              fill
-              priority
-              sizes="(max-width: 900px) 100vw, 49vw"
-            />
+          <div className="board-title">
+            <span>01 — 04</span>
+            <strong>Одна задача.<br />Прозрачный маршрут.</strong>
           </div>
-          <div className="mini-pipeline" aria-label="Этапы подбора">
-            {pipeline.map((stage, i) => (
-              <div className="stage" key={stage[0]}>
-                <span>{String(i + 1).padStart(2, '0')}</span>
-                <b>{stage[0]}</b>
-                {i < pipeline.length - 1 && <i />}
+          <div className="board-steps">
+            {pipeline.map((stage) => (
+              <div key={stage.number}>
+                <span>{stage.number}</span>
+                <b>{stage.title}</b>
+                <span className="board-step-marker" aria-hidden="true" />
               </div>
             ))}
           </div>
+          <div className="board-bottom">
+            <span>КРИТЕРИИ → ПОИСК → ОТБОР → ПЕРЕДАЧА</span>
+            <span>WC / 2026</span>
+          </div>
         </div>
       </section>
-      <div className="core-ticker">
-        <span>ПОИСК КАНДИДАТОВ</span>
-        <i />
-        <span>ПЕРВИЧНЫЙ ОТБОР</span>
-        <i />
-        <span>ИНТЕРВЬЮ</span>
-        <i />
-        <span>СОПРОВОЖДЕНИЕ</span>
+      <div className="core-summary" aria-label="Как строится работа">
+        <div><span>НА ВХОДЕ</span><b>Задача и критерии</b></div>
+        <div><span>В РАБОТЕ</span><b>Поиск и первый контакт</b></div>
+        <div><span>НА ВЫХОДЕ</span><b>Кандидаты с контекстом</b></div>
       </div>
     </>
   );
 }
 
-export function Solutions() {
-  const icons = [ScanSearch, Blocks, UsersRound, UserRoundSearch];
+export function Formats() {
   return (
-    <section className="core-section solutions reveal" id="solutions">
+    <section className="formats-section" id="formats">
       <div className="core-section-head">
         <div>
-          <p className="sys-label">01 / РЕШЕНИЯ</p>
-          <h2>
-            Подбор под
-            <br />
-            <i>тип задачи.</i>
-          </h2>
+          <p className="sys-label">01 / ФОРМАТЫ РАБОТЫ</p>
+          <h2>Разные задачи.<br /><span>Одна логика.</span></h2>
         </div>
         <p>
-          Не добавляем этапы ради процесса. Определяем, где вашей команде нужна
-          поддержка, и собираем подходящий сценарий работы.
+          Объём поиска меняется. Ясность задачи и способ обратной связи — нет.
+          Выбираем формат под текущую потребность компании.
         </p>
       </div>
-      <div className="solution-grid">
-        {solutions.map(([title, text], i) => {
-          const Icon = icons[i];
-          return (
-            <article key={title}>
-              <span>0{i + 1}</span>
-              <Icon />
-              <h3>{title}</h3>
-              <p>{text}</p>
-              <a href="#request">
-                Выбрать решение <ArrowRight size={16} />
-              </a>
-            </article>
-          );
-        })}
+      <div className="format-list">
+        {formats.map((format) => (
+          <article key={format.number}>
+            <div className="format-index"><span>{format.number}</span><small>{format.label}</small></div>
+            <h3>{format.title}</h3>
+            <div className="format-copy"><p>{format.description}</p><strong>{format.result}</strong></div>
+            <a href="#request" aria-label={`Обсудить формат: ${format.title}`}><ArrowRight /></a>
+          </article>
+        ))}
       </div>
     </section>
   );
@@ -228,26 +163,20 @@ export function Solutions() {
 
 export function Pipeline() {
   return (
-    <section className="pipeline-section reveal" id="pipeline">
+    <section className="pipeline-section" id="pipeline">
       <div className="pipeline-copy">
-        <p className="sys-label">02 / PIPELINE</p>
-        <h2>
-          Процесс виден.
-          <br />
-          Статус понятен.
-        </h2>
-        <p>Наведите на этап, чтобы увидеть, что происходит внутри.</p>
+        <p className="sys-label">02 / МАРШРУТ ЗАДАЧИ</p>
+        <h2>От запроса<br />к интервью.</h2>
+        <p>У каждого этапа есть конкретный результат. Никаких скрытых шагов между заявкой и передачей кандидата.</p>
       </div>
       <div className="pipeline-track">
-        {pipeline.map(([title, text], i) => (
-          <article key={title} tabIndex={0}>
-            <div className="node">
-              <span>{String(i + 1).padStart(2, '0')}</span>
-              <CircleDot />
-            </div>
-            <h3>{title}</h3>
-            <p>{text}</p>
-            {i < pipeline.length - 1 && <i />}
+        {pipeline.map((stage) => (
+          <article key={stage.number}>
+            <span className="pipeline-number">{stage.number}</span>
+            <div className="pipeline-line" aria-hidden="true"><span /></div>
+            <h3>{stage.title}</h3>
+            <p>{stage.description}</p>
+            <b>{stage.output}</b>
           </article>
         ))}
       </div>
@@ -255,84 +184,23 @@ export function Pipeline() {
   );
 }
 
-export function Directions() {
+export function Control() {
   return (
-    <section className="core-section directions reveal" id="directions">
-      <div className="direction-title">
-        <p className="sys-label">03 / НАПРАВЛЕНИЯ</p>
-        <h2>
-          Ищем не «резюме».
-          <br />
-          <span>Ищем соответствие.</span>
-        </h2>
+    <section className="control-section" id="control">
+      <div className="control-intro">
+        <p className="sys-label">03 / КОНТРОЛЬ</p>
+        <h2>Видно не только<br /><span>кого нашли.</span></h2>
+        <p>Работа с вакансией не должна превращаться в ожидание без новостей. До старта согласуем точки связи и то, какую информацию ваша команда получает на каждом этапе.</p>
+        <a href="#request">Обсудить свою задачу <ArrowRight size={19} /></a>
       </div>
-      <div className="direction-grid">
-        {directions.map((item, i) => (
-          <article key={item}>
-            <span>{String(i + 1).padStart(2, '0')}</span>
-            <h3>{item}</h3>
-            <ArrowRight />
+      <div className="control-list">
+        {controlPoints.map((point) => (
+          <article key={point.number}>
+            <span>{point.number}</span>
+            <div><h3>{point.title}</h3><p>{point.text}</p></div>
           </article>
         ))}
       </div>
-      <p className="direction-note">
-        Список не означает узкую специализацию. Возможность работы с конкретной
-        вакансией оцениваем до старта.
-      </p>
-    </section>
-  );
-}
-
-export function Principles() {
-  return (
-    <section className="principles reveal" id="principles">
-      <div>
-        <p className="sys-label">04 / ПРИНЦИПЫ</p>
-        <h2>
-          Без общих слов.
-          <br />
-          <i>По существу.</i>
-        </h2>
-      </div>
-      <div className="principle-list">
-        {principles.map(([title, text], i) => (
-          <article key={title}>
-            <span>{String(i + 1).padStart(2, '0')}</span>
-            <h3>{title}</h3>
-            <p>{text}</p>
-            <Check />
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-export function FAQ() {
-  return (
-    <section className="core-faq reveal">
-      <aside>
-        <p className="sys-label">05 / FAQ</p>
-        <h2>
-          Вопросы
-          <br />о работе
-          <br />с нами.
-        </h2>
-        <Sparkles />
-      </aside>
-      <Accordion className="core-faq-list">
-        {faq.map(([q, a], i) => (
-          <AccordionItem key={q} value={`faq-${i}`} className="core-faq-item">
-            <AccordionTrigger className="core-faq-trigger">
-              <span>{String(i + 1).padStart(2, '0')}</span>
-              {q}
-            </AccordionTrigger>
-            <AccordionContent className="core-faq-content">
-              <p>{a}</p>
-            </AccordionContent>
-          </AccordionItem>
-        ))}
-      </Accordion>
     </section>
   );
 }
@@ -355,22 +223,21 @@ export function Request() {
     setSent(true);
   }
   return (
-    <section className="core-request reveal" id="request">
+    <section className="core-request" id="request">
       <div className="request-status">
-        <p className="sys-label">06 / START</p>
-        <span>
-          <i /> ДОСТУПНО ДЛЯ НОВОЙ ЗАДАЧИ
-        </span>
+        <p className="sys-label">04 / НАЧАТЬ РАБОТУ</p>
+        <span>ОБСУДИМ ВАШУ ЗАДАЧУ</span>
       </div>
       <div className="core-request-grid">
         <div>
           <h2>
-            Начнём
-            <br />с вашей <i>вакансии.</i>
+            Есть задача<br />
+            по найму?
           </h2>
           <p>
-            Опишите вакансию в короткой форме. Сейчас она работает в
-            демонстрационном режиме и не передаёт данные.
+            Напишите нам напрямую: <a href={`mailto:${company.email}`}>{company.email}</a> или
+            позвоните <a href={`tel:+${company.phone.replace(/\D/g, '')}`}>{company.phone}</a>.
+            Форма справа пока демонстрационная и не отправляет данные.
           </p>
         </div>
         <div className="request-console">
@@ -402,8 +269,7 @@ export function Request() {
             </button>
             {sent && (
               <output>
-                DEMO / данные не отправлены. Здесь появится ответ после
-                подключения API.
+                Данные не отправлены. Свяжитесь с нами по телефону или электронной почте слева.
               </output>
             )}
           </form>
@@ -418,7 +284,7 @@ export function Footer() {
     <footer>
       <div className="footer-brand">
         <Logo />
-        <p>Digital-first поиск и подбор персонала.</p>
+        <p>Системный поиск персонала для бизнеса.</p>
       </div>
       <div className="footer-links">
         {nav.map(([label, href]) => (
@@ -428,7 +294,7 @@ export function Footer() {
         ))}
         <a href="#request">Оставить заявку</a>
       </div>
-      <section className="footer-requisites" aria-labelledby="workcore-requisites-title">
+      <section className="footer-requisites" id="contact" aria-labelledby="workcore-requisites-title">
         <p className="footer-requisites-label" id="workcore-requisites-title">Контакты и реквизиты</p>
         <a className="footer-requisites-phone" href={`tel:+${company.phone.replace(/\D/g, '')}`}>{company.phone}</a>
         <a className="footer-requisites-email" href={`mailto:${company.email}`}>{company.email}</a>
@@ -451,30 +317,13 @@ export function Footer() {
 }
 
 export default function Landing() {
-  useEffect(() => {
-    const nodes = document.querySelectorAll('.reveal');
-    const ob = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            ob.unobserve(entry.target);
-          }
-        }),
-      { threshold: 0.1 },
-    );
-    nodes.forEach((node) => ob.observe(node));
-    return () => ob.disconnect();
-  }, []);
   return (
     <main>
       <Header />
       <Hero />
-      <Solutions />
+      <Formats />
       <Pipeline />
-      <Directions />
-      <Principles />
-      <FAQ />
+      <Control />
       <Request />
       <Footer />
     </main>
