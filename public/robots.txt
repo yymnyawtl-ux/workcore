@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://yymnyawtl-ux.github.io/workcore/sitemap.xml
+Sitemap: https://workcore67.ru/sitemap.xml
+

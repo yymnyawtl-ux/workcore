@@ -33,11 +33,10 @@ jobs:
       - run: npm run build
         env:
           GITHUB_PAGES: 'true'
-          NEXT_PUBLIC_BASE_PATH: /workcore
-      - run: node scripts/prepare-github-pages.mjs /workcore
       - run: touch dist/client/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist/client
       - id: deployment
         uses: actions/deploy-pages@v4
+

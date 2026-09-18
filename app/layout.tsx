@@ -4,8 +4,8 @@ import './globals.css';
 
 const geist=Geist({variable:'--font-geist',subsets:['latin','cyrillic']});
 const isGitHubPages=process.env.GITHUB_PAGES==='true';
-const siteUrl=isGitHubPages?'https://yymnyawtl-ux.github.io/workcore':'https://workcore-hr.yymnyawtl.chatgpt.site';
-const assetBase=isGitHubPages?'/workcore':'';
+const siteUrl=isGitHubPages?'https://workcore67.ru':'https://workcore-hr.yymnyawtl.chatgpt.site';
+const assetBase='';
 export const metadata:Metadata={
   metadataBase:new URL(siteUrl),
   title:{default:'WorkCore — системный поиск сотрудников',template:'%s — WorkCore'},
@@ -17,3 +17,4 @@ export const metadata:Metadata={
   robots:{index:true,follow:true},
 };
 export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="ru" className="dark"><body className={geist.variable}>{children}</body></html>}
+
